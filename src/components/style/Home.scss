@@ -1,0 +1,17 @@
+.container_image {
+    background-image: url("../../../public/age_of_empires_logo.png");
+    background-repeat:no-repeat;
+    background-position: center top;
+    height: 450px;
+    padding-top: 75px;
+
+    .desc {
+        margin-top: 200px;
+        font-size: 24px;
+        color: red;
+
+        .italic {
+            color: black;
+        }
+    }
+}
