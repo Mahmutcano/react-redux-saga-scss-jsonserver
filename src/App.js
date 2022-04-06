@@ -18,7 +18,7 @@ export const App = () => {
     <>
       <Navbar bg="dark" variant="dark">
         <Container fluid>
-        <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">Age Of Empires</Navbar.Brand>
         <Nav className="justify-content-end flex-grow-1 pe-3">
           <Nav.Link as={Link} to="/">Home</Nav.Link>
           <Nav.Link as={Link} to="/UnitList">Units</Nav.Link>
