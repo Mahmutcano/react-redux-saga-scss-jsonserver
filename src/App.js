@@ -10,7 +10,7 @@ import {
 import { UnitList } from './components/UnitList';
 import { UnitDetail } from './components/UnitDetail';
 import { Home } from './components/Home';
-import './App.scss';
+import './style/App.scss';
 
 export const App = () => {
   return (

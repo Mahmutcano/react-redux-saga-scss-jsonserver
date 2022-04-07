@@ -5,17 +5,26 @@ import Table from 'react-bootstrap/Table';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
-import Slider, { Range } from 'rc-slider';
 import './style/UnitList.scss';
+import RangeSlider from 'rsuite/RangeSlider';
+import Checkbox from 'rsuite/Checkbox';
+
+
+
+
+
+
 
 
 export const UnitList = () => {
     const units = useSelector((state) => state.units);
     const dispatch =useDispatch();
 
+
     useEffect(() => {
         dispatch(Actions.unitActions.getUnits());
     }, [dispatch]);
+
 
     
 
@@ -25,78 +34,82 @@ export const UnitList = () => {
         <hr/>
 
         <div className="unıt-tabs container">
-            <div className="unıt-tab d-flex justify-content-inherit my-5">
-                <button className="btn btn-dark px-5">All</button>
+            <h2 className="text-center">Ages</h2><hr/>
+            <div className="unıt-tab d-flex justify-content-around">
+                
+                <button className="btn btn-dark px-5" >All</button>
                 <button className="btn btn-dark px-5">Dark</button>
-                <button className="btn btn-dark px-5">Feudal</button>
+                <button className="btn btn-dark px-5" >Feudal</button>
                 <button className="btn btn-dark px-5">Castle</button>
                 <button className="btn btn-dark px-5">Imperial</button>
             </div>
-        </div>
+        </div><hr/>
         <div className="unıt-items container-fluid mb-5">
             <div className="row">
-                <div className="col-11 mx-auto">
-                    <div className="row my-5">
-                        <div className="item1 col-12 col-md-6 col-lg-6 col-xl-4">
+                <div className="col-11 mx-auto ">
+                    <div className="row my-5 justify-content-around">
+                        <div className="item1 col-12 col-md-6 col-lg-12 col-xl-6">
+                            
                             <Table striped bordered hover>
-                                        <thead>
+                                        <thead className="dark">
                                         <tr>
                                             <th>İD</th>
                                             <th>Name</th>
                                             <th>Age</th>
-                                            <th>Cost</th>
+                                            <th>Movement Rate</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
+                                     <tbody>
                                         {units.map((unit) => {
                                             return <>
                                             <tr key={unit.id}>
                                                 <td >{unit.id}</td>
-                                                <td>{unit.name}</td>
+                                                <td><a href="/UnitDetail=key">{unit.name}</a></td>
                                                 <td>{unit.age}</td>
-                                                <td>{unit.age}</td>
+                                                <td>{unit.movement_rate}</td>
                                             </tr>
                                             </>
                                         })}                 
-                                            </tbody>
-                                    </Table>
+                                    </tbody>
+                            </Table>
                         </div>
                         
-                        <div className="item1 col-12 col-md-12 col-lg-12 col-xl-3 mx-5">
-                            <>
-                            <Form>
-                            {['checkbox'].map((type) => (
-                                <div key={`inline-${type}`} className="mb-3">
-                                <Form.Check
-                                    inline
-                                    label="Wood"
-                                    name="group1"
-                                    type={type}
-                                    id={`inline-${type}-1`}
-                                />
-                                <Form.Check
-                                    inline
-                                    label="Food"
-                                    name="group1"
-                                    type={type}
-                                    id={`inline-${type}-2`}
-                                />
-                                <Form.Check
-                                    inline
-                                    label="Gold"
-                                    type={type}
-                                    id={`inline-${type}-3`}
+                        <div className="item1 col-1 col-md-1 col-lg-1 col-xl-3 mx-5">
+                                <h2 className="text-center">Cost</h2><hr/>
+                                <div>
+                                <Checkbox> Wood </Checkbox>
+                                <RangeSlider
+                                max={200}
+                                defaultValue={[10, 40]}
+                                constraint={([start, end]) => start <= 50 && end >= 35}
                                 />
                                 </div>
-                            ))}
-                            </Form>
-                            </>
+                                <hr/>
+
+                                <div>
+                                <Checkbox> Food </Checkbox>
+                                <RangeSlider
+                                max={200}
+                                defaultValue={[10, 200]}
+                                constraint={([start, end]) => start <= 25 && end >= 35}
+                                />
+                                </div>
+                                <hr/>
+
+                                <div>
+                                <Checkbox> Gold </Checkbox>
+                                <RangeSlider
+                                max={100}
+                                defaultValue={[10, 40]}
+                                constraint={([start, end]) => start <= 50 && end >= 35}
+                                />
+                                </div>
+                           
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
         </>
     );
 };
